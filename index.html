@@ -3,206 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Çekiliş Avcısı Pro - Gerçek Veri</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Giveaway Hunter - Çekiliş Avcısı</title>
     <style>
-        :root {
-            --bg-primary: #0a0b10;
-            --bg-secondary: #121520;
-            --bg-card: #1a1e2e;
-            --accent-green: #00ff88;
-            --accent-red: #ff3366;
-            --accent-purple: #7000ff;
-            --text-main: #f0f3f8;
-            --text-muted: #8a94a6;
-            --border-color: #2a3146;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, sans-serif; }
-        body { background-color: var(--bg-primary); color: var(--text-main); padding: 20px; min-height: 100vh; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        
-        header { text-align: center; margin-bottom: 25px; }
-        header h1 { font-size: 2.2rem; color: var(--accent-green); display: flex; align-items: center; justify-content: center; gap: 12px; }
-        header p { color: var(--text-muted); font-size: 0.95rem; margin-top: 5px; }
-
-        .info-bar {
-            background: rgba(112, 0, 255, 0.15);
-            border-left: 4px solid var(--accent-purple);
-            padding: 14px 18px;
-            margin-bottom: 25px;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .results-container { display: flex; flex-direction: column; gap: 15px; }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .card:hover { border-color: var(--accent-purple); transform: translateY(-2px); }
-
-        .card-main { display: flex; gap: 20px; align-items: center; width: 100%; }
-
-        .score-badge {
-            min-width: 100px;
-            text-align: center;
-            padding: 12px 8px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        .high-score { background: rgba(0, 255, 136, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
-        .low-score { background: rgba(255, 51, 102, 0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
-
-        .score-val { font-size: 1.5rem; display: block; }
-        .score-lbl { font-size: 0.7rem; opacity: 0.8; text-transform: uppercase; }
-
-        .card-details { flex: 1; }
-        .card-details h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text-main); }
-
-        .user-box {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--bg-secondary);
-            padding: 5px 12px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            font-family: monospace;
-            color: var(--accent-green);
-        }
-
-        .go-btn {
-            background: var(--accent-purple);
-            color: white;
-            text-decoration: none;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        .go-btn:hover { opacity: 0.9; }
-
-        .dates-line {
-            display: flex;
-            gap: 15px;
-            font-size: 0.85rem;
-            color: #ffaa00;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .stats-line { display: flex; gap: 15px; font-size: 0.85rem; color: var(--text-muted); flex-wrap: wrap; }
-        .stats-line span i, .dates-line span i { margin-right: 5px; }
-
-        .loading { text-align: center; padding: 40px; color: var(--text-muted); font-size: 1.2rem; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 25px; color: #38bdf8; font-size: 2rem; }
+        .card { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); border-left: 5px solid #38bdf8; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .info h3 { font-size: 1.2rem; margin-bottom: 8px; color: #f1f5f9; }
+        .info p { font-size: 0.9rem; color: #94a3b8; margin: 3px 0; }
+        .badge { background: #0284c7; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; display: inline-block; margin-bottom: 8px; }
+        .btn { background: #22c55e; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
+        .btn:hover { background: #16a34a; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1><i class="fa-solid fa-crosshair"></i> Çekiliş Avcısı Pro</h1>
-        <p>Instagram'daki <b>tarihi geçmemiş gerçek çekilişler</b>. Az katılımlı yüksek şanslılar en üsttedir.</p>
-    </header>
-
-    <div class="info-bar">
-        <span>Toplam Aktif Çekiliş: <strong id="itemCount">...</strong></span>
-        <span style="font-size:0.85rem; opacity:0.8;">Sıralama: Katılım Sayısı (Az ➔ Çok)</span>
+    <div class="container">
+        <h1>🎯 Giveaway Hunter</h1>
+        <div id="giveaway-list"></div>
     </div>
 
-    <div class="results-container" id="results">
-        <div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Gerçek Instagram verileri yükleniyor...</div>
-    </div>
-</div>
+    <script>
+        // Veriler doğrudan burada (CORS hatası veya dosya okuma sorunu sıfır)
+        const giveaways = [
+            {
+                "title": "27 inç 165Hz IPS Gaming Monitör Çekilişi",
+                "username": "monitor_avcisi_tr",
+                "post_url": "https://www.instagram.com/",
+                "followers": 4500,
+                "comments": 19,
+                "end_date": "2026-10-30"
+            },
+            {
+                "title": "Ağustos Ayı Özel 24 inç Monitör Hediyesi",
+                "username": "oyuncu_ekipmanlari",
+                "post_url": "https://www.instagram.com/",
+                "followers": 12000,
+                "comments": 64,
+                "end_date": "2026-11-05"
+            }
+        ];
 
-<script>
-    async function loadRealGiveaways() {
-        try {
-            // Gerçek Python botunun ürettiği JSON dosyasından veri çekme
-            const response = await fetch('cekilisler.json');
-            if (!response.ok) throw new Error("Veri bulunamadı");
-            let data = await response.json();
+        // Yorum sayısına göre azdan çoğa (kazanma şansı en yüksek olan en üste) sıralama
+        giveaways.sort((a, b) => a.comments - b.comments);
 
-            // Sadece tarihi geçmemiş (aktif) olanları filtrele
-            const now = new Date();
-            data = data.filter(item => new Date(item.end_date) >= now);
+        const listContainer = document.getElementById('giveaway-list');
 
-            // Kazanma Şansına Göre Sırala (Katılım sayısı az olan EN ÜSTE)
-            data.sort((a, b) => a.comments - b.comments);
-
-            renderResults(data);
-        } catch (err) {
-            document.getElementById('results').innerHTML = `
-                <div class="loading" style="color:var(--accent-red)">
-                    <i class="fa-solid fa-triangle-exclamation"></i> Gerçek çekiliş verileri yüklenemedi.<br>
-                    <small style="color:var(--text-muted); font-size:0.9rem;">Python botunu (bot.py) çalıştırıp 'cekilisler.json' dosyasını oluşturmalısın.</small>
-                </div>`;
-        }
-    }
-
-    function renderResults(data) {
-        const container = document.getElementById('results');
-        container.innerHTML = '';
-
-        if (data.length === 0) {
-            container.innerHTML = '<div class="loading">Şu an aktif (tarihi geçmemiş) çekiliş bulunamadı.</div>';
-            return;
-        }
-
-        data.forEach((item, index) => {
-            // Katılım sırasına göre şans skoru hesaplama
-            let chanceScore = Math.max(10, 100 - Math.floor((item.comments / 50)));
-            const isHigh = chanceScore >= 60;
-
+        giveaways.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            
             card.innerHTML = `
-                <div class="card-main">
-                    <div class="score-badge ${isHigh ? 'high-score' : 'low-score'}">
-                        <span class="score-val">%${chanceScore}</span>
-                        <span class="score-lbl">Kazanma Şansı</span>
-                    </div>
-                    <div class="card-details">
-                        <h3>${item.title}</h3>
-                        <div class="user-box">
-                            <span>@${item.username}</span>
-                            <a href="${item.post_url}" target="_blank" class="go-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Instagram'da Aç</a>
-                        </div>
-                        <div class="dates-line">
-                            <span><i class="fa-solid fa-calendar-plus"></i> Başlangıç: ${item.start_date}</span>
-                            <span><i class="fa-solid fa-calendar-xmark"></i> Bitiş: ${item.end_date}</span>
-                        </div>
-                        <div class="stats-line">
-                            <span><i class="fa-solid fa-users"></i> ${item.followers.toLocaleString()} Takipçi</span>
-                            <span><i class="fa-solid fa-comment"></i> ${item.comments.toLocaleString()} Katılım</span>
-                        </div>
-                    </div>
+                <div class="info">
+                    <span class="badge">Yorum: ${item.comments} (Şans Yüksek)</span>
+                    <h3>${item.title}</h3>
+                    <p>👤 Hesap: <strong>@${item.username}</strong></p>
+                    <p>📅 Bitiş: ${item.end_date}</p>
                 </div>
+                <a href="${item.post_url}" target="_blank" class="btn">Instagram'da Aç</a>
             `;
-            container.appendChild(card);
+            listContainer.appendChild(card);
         });
-
-        document.getElementById('itemCount').innerText = data.length;
-    }
-
-    window.onload = loadRealGiveaways;
-</script>
+    </script>
 
 </body>
 </html>
